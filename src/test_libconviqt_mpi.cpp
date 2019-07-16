@@ -103,13 +103,13 @@ int main( int argc, char **argv ) {
   }
     
   std::cout << rank << " : Convolving self" << std::endl;
-  convolver cnv_self( &s, &b, &d, pol, lmax, beammmax, order, comm_self );
+  convolver cnv_self( &s, &b, &d, pol, lmax, beammmax, order, true, comm_self );
   if (rank == 0) cnv_self.convolve( pnt_self );
 
   MPI_Barrier( comm_world );
 
   std::cout << rank << " : Convolving world" << std::endl;
-  convolver cnv_world( &s, &b, &d, pol, lmax, beammmax, order, comm_world );
+  convolver cnv_world( &s, &b, &d, pol, lmax, beammmax, order, true, comm_world );
   cnv_world.convolve( pnt_world );
 
   std::vector<int> counts(ntasks);
